@@ -15,11 +15,6 @@ onRecordCreate((e) => {
 /// <reference path="../pb_data/types.d.ts" />
 
 onRecordCreateRequest(async (e) => {
-  // Log for debugging purposes
-  console.log("Record create request event:", JSON.stringify(e, null, 2));
-  console.log("Auth ID:", e.auth?.id);
-  console.log("Record data:", e.record);
-
   // First, make sure we have an authenticated user
   if (!e.auth?.id) {
     console.error("No authenticated user found for class creation");
@@ -49,8 +44,6 @@ onRecordCreateRequest(async (e) => {
     console.log(
       `Created class_members entry: class=${classId}, user=${userId}, role=owner`
     );
-
-    // Don't call e.next() a second time - it's already been called
   } catch (err) {
     console.error("Failed during class creation process:", err);
     //Delete the class if the class_members record creation fails
